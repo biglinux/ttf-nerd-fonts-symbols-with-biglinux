@@ -1,18 +1,19 @@
 # Maintainer: Barnabé di Kartola <barnabedikartola@gmail.com>
 
-pkgname=biglinux-package-template
-pkgdesc="Package template for biglinux"
-# depends=('')
+pkgname=ttf-nerd-fonts-symbols-with-biglinux
+pkgdesc="High number of extra glyphs from popular 'iconic fonts' with BigLinux icon"
+depends=('ttf-nerd-fonts-symbols-common')
 # makedepends=('')
-# conflicts=('')
+conflicts=('ttf-nerd-fonts-symbols' 'ttf-nerd-fonts-symbols-mono')
 pkgver=$(date +%y.%m.%d)
 pkgrel=$(date +%H%M)
 arch=('any')
-license=('GPL3')
-url="https://github.com/biglinux/$pkgname"
-provides=("$pkgname")
-source=("git+${url}.git")
-md5sums=('SKIP')
+license=('custom')
+url="https://github.com/hasecilu/font-logos/"
+provides=("$pkgname" "ttf-nerd-fonts-symbols" "ttf-nerd-fonts-symbols-mono")
+license=('custom')
+source=("https://github.com/hasecilu/font-logos/releases/download/v1.1.0/font-logos+SymbolsNerdFont.zip")
+sha512sums=('fc01e69ea7e859a4b71fbad5e314abbe7ae48e815f27ad8f97859a924e1f84a141164604c91def36f6dd6d0e0c449c6aeee2e2e3b8b280b1655369b66e3f06e6')
 if [ -e "${pkgname}.install" ];then
     install=${pkgname}.install
 elif [ -e "pkgbuild.install" ];then
@@ -20,23 +21,7 @@ elif [ -e "pkgbuild.install" ];then
 fi
 
 package() {
-    # Verify default folder
-    if [ -d "${srcdir}/${pkgname}/${pkgname}" ]; then
-        InternalDir="${srcdir}/${pkgname}/${pkgname}"
-    else
-        InternalDir="${srcdir}/${pkgname}"
-    fi
-
-    # Copy files
-    if [ -d "${InternalDir}/usr" ]; then
-        cp -r "${InternalDir}/usr" "${pkgdir}/"
-    fi
-
-    if [ -d "${InternalDir}/etc" ]; then
-        cp -r "${InternalDir}/etc" "${pkgdir}/"
-    fi
-
-    if [ -d "${InternalDir}/opt" ]; then
-        cp -r "${InternalDir}/opt" "${pkgdir}/"
-    fi
+    mkdir -p $pkgdir/usr/share/fonts/TTF/
+    unzip 'font-logos+SymbolsNerdFont.zip' -d "$pkgdir/usr/share/fonts/TTF/"
+    rm "$pkgdir/usr/share/fonts/TTF/font-logos.ttf"
 }
