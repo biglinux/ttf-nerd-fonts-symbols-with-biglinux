@@ -1,0 +1,11 @@
+post_install() {
+    ln -s /usr/share/fontconfig/conf.avail/10-nerd-font-symbols.conf /etc/fonts/conf.d/10-nerd-font-symbols.conf
+}
+
+post_upgrade() {
+    ln -sf /usr/share/fontconfig/conf.avail/10-nerd-font-symbols.conf /etc/fonts/conf.d/10-nerd-font-symbols.conf
+}
+
+pre_remove() {
+    rm /etc/fonts/conf.d/10-nerd-font-symbols.conf
+} 
