@@ -3,7 +3,7 @@
 pkgname=ttf-nerd-fonts-symbols-with-biglinux
 pkgdesc="High number of extra glyphs from popular 'iconic fonts' with BigLinux icon"
 depends=('ttf-nerd-fonts-symbols-common')
-# makedepends=('')
+makedepends=('unzip')
 conflicts=('ttf-nerd-fonts-symbols' 'ttf-nerd-fonts-symbols-mono')
 pkgver=$(date +%y.%m.%d)
 pkgrel=$(date +%H%M)
